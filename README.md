@@ -1,5 +1,4 @@
 <p align="center" >
-<p align="center" >
    <a href="https://reactnative.gallery/FaridSafi/gifted-chat">
     <img alt="react-native-gifted-chat" src="https://thumbs.gfycat.com/AbsoluteSadDobermanpinscher-size_restricted.gif" width="260" height="510" />
  </a>
@@ -286,7 +285,6 @@ interface QuickReplies {
 - **`showUserAvatar`** _(Bool)_ - Whether to render an avatar for the current user; default is `false`, only show avatars for other users
 - **`showAvatarForEveryMessage`** _(Bool)_ - When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is `false`
 - **`onPressAvatar`** _(Function(`user`))_ - Callback when a message avatar is tapped
-- **`onLongPressAvatar`** _(Function(`user`))_ - Callback when a message avatar is long-pressed
 - **`renderAvatarOnTop`** _(Bool)_ - Render the message avatar at the top of consecutive messages, rather than the bottom; default is `false`
 - **`renderBubble`** _(Function)_ - Custom message bubble
 - **`renderSystemMessage`** _(Function)_ - Custom system message
@@ -300,7 +298,6 @@ interface QuickReplies {
 - **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://facebook.github.io/react-native/docs/image.html) component created by the default `renderMessageImage`
 - **`videoProps`** _(Object)_ - Extra props to be passed to the [`<Video>`](https://github.com/react-native-community/react-native-video) component created by the default `renderMessageVideo`
 - **`lightboxProps`** _(Object)_ - Extra props to be passed to the `MessageImage`'s [Lightbox](https://github.com/oblador/react-native-lightbox)
-- **`isCustomViewBottom`** _(Bool)_ - Determine wether renderCustomView is displayed before or after the text, image and video views; default is `false`
 - **`renderCustomView`** _(Function)_ - Custom view inside the bubble
 - **`renderDay`** _(Function)_ - Custom day above a message
 - **`renderTime`** _(Function)_ - Custom time inside a message
@@ -340,7 +337,7 @@ interface QuickReplies {
 * **`scrollToBottomStyle`** _(Object)_ - Custom style for Bottom Component container
 * **`alignTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
 * **`onQuickReply`** _(Function)_ - Callback when sending a quick reply (to backend server)
-* **`renderQuickReplies`** _(Function)_ - Custom all quick reply view
+* **`renderQuickReply`** _(Function)_ - Custom all quick reply view
 * **`quickReplyStyle`** _(StyleProp<ViewStyle>)_ - Custom quick reply view style
 * **`renderQuickReplySend`** _(Function)_ - Custom quick reply **send** view
 * **`shouldUpdateMessage`** _(Function)_ - Lets the message component know when to update outside of normal cases.
@@ -379,22 +376,10 @@ If you are using Create React Native App / Expo, no Android specific installatio
     android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
   ```
 
-- For **Expo**, there are at least 2 solutions to fix it:
+- For **Expo**, there are almost 2 solutions to fix it:
 
-  - Wrap GiftedChat in a [`KeyboardAvoidingView`](https://facebook.github.io/react-native/docs/keyboardavoidingview). This should only be done for Android, as `KeyboardAvoidingView` may conflict with the iOS keyboard avoidance already built into GiftedChat, e.g.:
-```
-<View style={{ flex: 1 }}>
-   {
-      Platform.OS === 'android' ?
-         <KeyboardAvoidingView behavior="padding">
-            <GiftedChat />
-         </KeyboardAvoidingView> :
-         <GiftedChat />
-   }
-</View>
-```
-If you use React Navigation, additional handling may be required to account for navigation headers and tabs. `KeyboardAvoidingView`'s `keyboardVerticalOffset` property can be set to the height of the navigation header and [`tabBarOptions.keyboardHidesTabBar`](https://reactnavigation.org/docs/en/bottom-tab-navigator.html#bottomtabnavigatorconfig) can be set to keep the tab bar from being shown when the keyboard is up. Due to a [bug with calculating height on Android phones with notches](facebook/react-native#23693), `KeyboardAvoidingView` is recommended over other solutions that involve calculating the height of the window.
-  - adding an opaque background status bar on app.json (even though `android:windowSoftInputMode="adjustResize"` is set internally on Expo's Android apps, the transulcent status bar causes it not to work): https://docs.expo.io/versions/latest/guides/configuration.html#androidstatusbar
+  - adding KeyboardAvoidingView after GiftedChat [see this comment](https://github.com/FaridSafi/react-native-gifted-chat/issues/461#issuecomment-314858092)
+  - adding an opaque background status bar on app.json https://docs.expo.io/versions/latest/guides/configuration.html#androidstatusbar
 
 - If you plan to use `GiftedChat` inside a `Modal`, see [#200](https://github.com/FaridSafi/react-native-gifted-chat/issues/200).
 
@@ -436,3 +421,5 @@ Looking for a ReactNative freelance expert with more than 12 years experience? C
 
 
 <img src="https://api.keen.io/3.0/projects/5ae31b61c9e77c0001cc2093/events/pageviews?api_key=55301C3E5BAB217E90A5867113C02506CE20385CD6F4C9C1CCDD4671B1A9DE374C3DF9DEF70C0BB3F5A9C5CA4CB1CCCFAF25FC3ED9CF63FB83102456A6881EFBAECD1C7D9718EE5402752DD8F6FA2DEC4D844BCB17FE6262570DB447D9A8CED2&data=eyJ0aXRsZSI6ICJnYyJ9" />
+
+
