@@ -17,3 +17,4 @@ metro.config.js
 src/
 tsconfig.json
 tslint.json
+yarn.lock
